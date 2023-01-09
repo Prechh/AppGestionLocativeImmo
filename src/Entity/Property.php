@@ -5,9 +5,12 @@ namespace App\Entity;
 use App\Repository\PropertyRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 
 #[ORM\Entity(repositoryClass: PropertyRepository::class)]
+#[UniqueEntity('title')]
 class Property
 {
     #[ORM\Id]
@@ -16,36 +19,55 @@ class Property
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\Length(
+        min: 5,
+        max: 255,
+        minMessage: 'Votre titre est trop court. Il doit contenir au minimum 5 caractères',
+        maxMessage: 'Votre titre est trop long. Il doit contenir au maximum 255 caractères',
+    )]
     private ?string $title = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $description = null;
 
     #[ORM\Column]
+    #[Assert\Range(
+        min: 10,
+        max: 400,
+        notInRangeMessage: 'Cette valeur doit être comprise entre 10cm² et 400cm²',
+    )]
     private ?int $surface = null;
 
     #[ORM\Column]
+    #[Assert\NotNull()]
     private ?int $rooms = null;
 
     #[ORM\Column]
+    #[Assert\NotNull()]
     private ?int $bedrooms = null;
 
     #[ORM\Column]
+    #[Assert\NotNull()]
     private ?int $floor = null;
 
     #[ORM\Column]
+    #[Assert\NotNull()]
+    #[Assert\Positive()]
     private ?int $price = null;
 
     #[ORM\Column]
     private ?int $heat = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotNull()]
     private ?string $city = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotNull()]
     private ?string $address = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\Regex('/^[0-9]{5}$/')]
     private ?string $postal_code = null;
 
     #[ORM\Column]
