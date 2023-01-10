@@ -20,7 +20,7 @@ class AppFixtures extends Fixture
 
     public function load(ObjectManager $manager): void
     {
-        for ($i = 1; $i < 10; $i++) {
+        for ($i = 1; $i < 30; $i++) {
             $property = new Property();
             $property->setTitle($this->faker->word())
                 ->setAddress($this->faker->word())

@@ -8,9 +8,58 @@
 	<div class="container mt-5">
 		<div class="jumbotron">
 			<h1 class="display-4">
-				Voir tous nos biens
+				Voir, modifier et supprimer les biens
 			</h1>
 			<p class="lead">Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi consequatur eaque asperiores nobis illum sunt doloremque beatae, minima a non perspiciatis maiores inventore nisi ratione quas quod qui. Praesentium, recusandae?</p>
+		</div>
+
+		<div class="container mt-4">
+			<table class="table table-hover">
+				<thead>
+					<tr>
+						<th scope="col">Numéros</th>
+						<th scope="col">Titre</th>
+						<th scope="col">Description</th>
+						<th scope="col">Surface</th>
+						<th scope="col">Pièces</th>
+						<th scope="col">Chambre</th>
+						<th scope="col">Etage</th>
+						<th scope="col">Chauffage</th>
+						<th scope="col">Ville</th>
+						<th scope="col">Adresse</th>
+						<th scope="col">Code postal</th>
+						<th scope="col">Prix</th>
+						<th scope="col">Date mise en vente</th>
+						<th scope="col">Vendu</th>
+					</tr>
+				</thead>
+
+				<tbody>
+					{% for property in propertys %}
+						<tr class="table-light">
+							<th scope="row">{{ property.id }}</th>
+							<td>{{ property.title }}</td>
+							<td>{{ property.description }}</td>
+							<td>{{ property.surface }}</td>
+							<td>{{ property.rooms }}</td>
+							<td>{{ property.bedrooms }}</td>
+							<td>{{ property.floor }}</td>
+							<td>{{ property.heat }}</td>
+							<td>{{ property.city }}</td>
+							<td>{{ property.address }}</td>
+							<td>{{ property.postalcode }}</td>
+							<td>{{ property.price }}</td>
+							<td>{{ property.createdat|date('d/m/Y') }}</td>
+							<td>{{ property.sold }}</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+
+			<div class="navigation d-flex justify-content-center">
+				{{ knp_pagination_render(propertys) }}
+			</div>
+
 		</div>
 	</div>
 {% endblock %}

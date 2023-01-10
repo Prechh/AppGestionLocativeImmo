@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	AgenceImmoFictive - Nos différents biens
+{% endblock %}
+
+{% block body %}
+	<div class="container mt-5">
+		<div class="jumbotron">
+			<h1 class="display-4">
+				Voir tous nos biens
+			</h1>
+			<p class="lead">Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi consequatur eaque asperiores nobis illum sunt doloremque beatae, minima a non perspiciatis maiores inventore nisi ratione quas quod qui. Praesentium, recusandae?</p>
+		</div>
+
+		<div class="container mt-4">
+			<h2>
+				Les derniers biens
+			</h2>
+			<div class="row flex">
+				{% for property in properties %}
+					<div class="col-3">
+						<div class="card mt-4">
+							<div class="card-body">
+								<h5 class="card-title">
+									<a href="#">
+										{{ property.title }}</a>
+								</h5>
+								<p class="card-text">{{ property.city }}({{ property.postalcode }})</p>
+								<div class="text-darkly">{{ property.price }}
+									€</div>
+							</div>
+						</div>
+					</div>
+				{% endfor %}
+			</div>
+
+			<div class="navigation d-flex justify-content-center mt-4">
+				{{ knp_pagination_render(properties) }}
+			</div>
+
+		</div>
+	</div>
+{% endblock %}
