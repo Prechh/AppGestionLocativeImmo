@@ -41,6 +41,10 @@ class Property
 
     #[ORM\Column]
     #[Assert\NotNull()]
+    #[Assert\Range(
+        min: 2,
+        notInRangeMessage: 'Cette valeur doit être au moins égale à 2',
+    )]
     private ?int $rooms = null;
 
     #[ORM\Column]
@@ -61,10 +65,22 @@ class Property
 
     #[ORM\Column(length: 255)]
     #[Assert\NotNull()]
+    #[Assert\Length(
+        min: 5,
+        max: 255,
+        minMessage: 'La valeur de ce champ est trop court. Il doit contenir au minimum 5 caractères',
+        maxMessage: 'La valeur de ce champ est trop long. Il doit contenir au maximum 255 caractères',
+    )]
     private ?string $city = null;
 
     #[ORM\Column(length: 255)]
     #[Assert\NotNull()]
+    #[Assert\Length(
+        min: 5,
+        max: 255,
+        minMessage: 'La valeur de ce champ est trop court. Il doit contenir au minimum 5 caractères',
+        maxMessage: 'La valeur de ce champ est trop long. Il doit contenir au maximum 255 caractères',
+    )]
     private ?string $address = null;
 
     #[ORM\Column(length: 255)]
