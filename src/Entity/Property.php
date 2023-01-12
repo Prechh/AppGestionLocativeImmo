@@ -14,6 +14,12 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 #[UniqueEntity('title')]
 class Property
 {
+
+    const HEAT = [
+        1 => 'Electrique',
+        2 => 'Gaz'
+    ];
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -200,6 +206,11 @@ class Property
         $this->heat = $heat;
 
         return $this;
+    }
+
+    public function getHeatType(): ?string
+    {
+        return self::HEAT[$this->heat];
     }
 
     public function getCity(): ?string

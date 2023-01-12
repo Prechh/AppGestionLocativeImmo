@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Property;
 use App\Repository\PropertyRepository;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -22,6 +23,14 @@ class PropertyUserController extends AbstractController
 
         return $this->render('property_user/propertyUser.html.twig', [
             'properties' => $properties
+        ]);
+    }
+
+    #[Route('/property/user/show/{id}', 'app_property_user_show',  methods: ['GET'])]
+    public function show(Property $property): Response
+    {
+        return $this->render('property_user/show.html.twig', [
+            'property' => $property
         ]);
     }
 }
