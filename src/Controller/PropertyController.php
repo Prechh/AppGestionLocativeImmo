@@ -53,4 +53,44 @@ class PropertyController extends AbstractController
             'form' => $form->createView()
         ]);
     }
+
+    #[Route('/property/edit/{id}', 'app_property_edit',  methods: ['GET', 'POST'])]
+    public function edit(Property $property, Request $request, EntityManagerInterface $manager): Response
+    {
+        $form = $this->createForm(PropertyFormType::class, $property);
+
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $property = $form->getData();
+
+            $manager->persist($property);
+            $manager->flush();
+
+            $this->addFlash(
+                'success',
+                'La propriétée à été modifié avec succès !'
+            );
+
+            return $this->redirectToRoute('app_property');
+        }
+
+        return $this->render('property/edit.html.twig', [
+            'form' => $form->createView()
+        ]);
+    }
+
+    #[Route('/property/delete/{id}', 'app_property_delete',  methods: ['GET'])]
+    public function delete(EntityManagerInterface $manager, Property $property): Response
+    {
+        $manager->remove($property);
+        $manager->flush();
+
+
+        $this->addFlash(
+            'success',
+            'La propriétée à été supprimé avec succès !'
+        );
+
+        return $this->redirectToRoute('app_property');
+    }
 }
