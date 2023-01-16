@@ -12,6 +12,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 #[UniqueEntity('email')]
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\Table(name: '`user`')]
+#[ORM\EntityListeners(['App\EntityListener\UserListener'])]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
@@ -19,25 +20,61 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?int $id = null;
 
+    #[ORM\Column(length: 50)]
+    #[Assert\NotBlank()]
+    #[Assert\Length(min: 2, max: 50)]
+    private ?string $Name = null;
+
+    #[ORM\Column(length: 50)]
+    #[Assert\NotBlank()]
+    #[Assert\Length(min: 2, max: 50)]
+    private ?string $Firstname = null;
+
     #[ORM\Column(length: 180, unique: true)]
+    #[Assert\Email()]
+    #[Assert\Length(min: 2, max: 180)]
     private ?string $email = null;
 
     #[ORM\Column]
     #[Assert\NotNull()]
     private array $roles = [];
 
+    #[Assert\NotBlank()]
     private ?string $plainPassword = null;
 
     /**
      * @var string The hashed password
      */
     #[ORM\Column]
-    #[Assert\NotBlank()]
     private ?string $password = null;
 
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function getName(): ?string
+    {
+        return $this->Name;
+    }
+
+    public function setName(string $Name): self
+    {
+        $this->Name = $Name;
+
+        return $this;
+    }
+
+    public function getFirstname(): ?string
+    {
+        return $this->Firstname;
+    }
+
+    public function setFirstname(string $Firstname): self
+    {
+        $this->Firstname = $Firstname;
+
+        return $this;
     }
 
     public function getEmail(): ?string
@@ -77,6 +114,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setRoles(array $roles): self
     {
         $this->roles = $roles;
+
+        return $this;
+    }
+
+    public function getPlainPassword(): string
+    {
+        return $this->plainPassword;
+    }
+
+    public function setPlainPassword(string $plainPassword): self
+    {
+        $this->plainPassword = $plainPassword;
 
         return $this;
     }
