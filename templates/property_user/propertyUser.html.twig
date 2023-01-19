@@ -21,6 +21,11 @@
 				{% for property in properties|sort %}
 					<div class="col-3">
 						<div class="card mt-4">
+							{% if property.imageName %}
+								<div class="property_image">
+									<img style="max-width: 100%; height: auto;" alt="card-img-top" src="{{ vich_uploader_asset(property, 'imageFile') }}">
+								</div>
+							{% endif %}
 							<div class="card-body">
 								<h5 class="card-title">
 									<a href="{{ path('app_property_user_show', {id: property.id}) }}">

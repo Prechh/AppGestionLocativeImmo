@@ -24,7 +24,7 @@ class PropertyController extends AbstractController
         );
 
         return $this->render('property/property.html.twig', [
-            'propertys' => $propertys
+            'propertys' => $propertys,
         ]);
     }
 

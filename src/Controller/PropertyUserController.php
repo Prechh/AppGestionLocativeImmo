@@ -12,9 +12,10 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class PropertyUserController extends AbstractController
 {
-    #[Route('/property/user', name: 'app_property_user')]
+    #[Route('/property/user', name: 'app_property_user', methods: ['GET'])]
     public function index(PropertyRepository $repository, PaginatorInterface $paginator, Request $request): Response
     {
+
         $properties = $paginator->paginate(
             $repository->findAll(),
             $request->query->getInt('page', 1), /*page number*/
@@ -22,7 +23,7 @@ class PropertyUserController extends AbstractController
         );
 
         return $this->render('property_user/propertyUser.html.twig', [
-            'properties' => $properties
+            'properties' => $properties,
         ]);
     }
 

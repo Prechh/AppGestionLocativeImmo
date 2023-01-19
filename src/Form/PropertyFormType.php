@@ -15,6 +15,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Validator\Constraints as Assert;
+use Vich\UploaderBundle\Form\Type\VichImageType;
 
 class PropertyFormType extends AbstractType
 {
@@ -191,6 +192,12 @@ class PropertyFormType extends AbstractType
                 ]
             ])
 
+            ->add('imageFile', VichImageType::class, [
+                'label' => 'Image du bien',
+                'label_attr' => [
+                    'class' => 'form-label mt-4'
+                ]
+            ])
 
             ->add('sold', CheckboxType::class, [
                 'label' => 'Vendu :',
@@ -201,10 +208,10 @@ class PropertyFormType extends AbstractType
 
             ->add('submit', SubmitType::class, [
                 'attr' => [
-                    "class" => 'btn btn-light mt-4',
+                    "class" => 'btn btn-success',
                     "class" => 'form-control'
                 ],
-                'label' => 'Ajouter la propriétée ',
+                'label' => 'Ajouter la propriétée',
 
             ]);
     }
