@@ -34,7 +34,7 @@
 							m²
 						</h2>
 						<div class="text-success" style="font-size: 4rem;font-weight: bold;">
-							{{ property.price }}
+							{{ property.price|number_format(2, '.', ',') }}
 							€
 						</div>
 						<a href="#" class="btn btn-success">

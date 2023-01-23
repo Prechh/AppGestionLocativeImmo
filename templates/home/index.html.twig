@@ -1,15 +1,20 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-	AgenceImmoFictive - Accueil
+	Accueil
 {% endblock %}
 
 {% block body %}
-	<div class="container mt-5">
-		<div class="jumbotron text-center">
-			<h1 class="display-4">Agence Immobilière fictive
-			</h1>
-			<p class="lead">Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi consequatur eaque asperiores nobis illum sunt doloremque beatae, minima a non perspiciatis maiores inventore nisi ratione quas quod qui. Praesentium, recusandae?</p>
+	<div class="main">
+		<div class="container mt-5">
+			<div class="jumbotron text-center">
+				<h1 class="display-4">Agence Immobilière fictive
+				</h1>
+				<p class="lead">Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi consequatur eaque asperiores nobis illum sunt doloremque beatae, minima a non perspiciatis maiores inventore nisi ratione quas quod qui. Praesentium, recusandae?</p>
+				<a href="{{ path('app_property_user') }}" class="btn btn-success">
+					Voir les propriétées
+				</a>
+			</div>
 		</div>
 	</div>
 {% endblock %}
