@@ -5,6 +5,7 @@ namespace App\DataFixtures;
 use Faker\Factory;
 use App\Entity\User;
 use Faker\Generator;
+use App\Entity\Contact;
 use App\Entity\Property;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
@@ -22,6 +23,7 @@ class AppFixtures extends Fixture
 
     public function load(ObjectManager $manager): void
     {
+        // property
         for ($i = 1; $i < 30; $i++) {
             $property = new Property();
             $property->setTitle($this->faker->word())
@@ -51,6 +53,19 @@ class AppFixtures extends Fixture
 
 
             $manager->persist($user);
+        }
+
+        // Contact 
+        for ($i = 0; $i < 5; $i++) {
+            $contact = new Contact();
+            $contact->setName($this->faker->lastName())
+                ->setFirstname($this->faker->firstName())
+                ->setEmail($this->faker->email())
+                ->setSubject('Demande n°' . ($i + 1))
+                ->setMessage($this->faker->text());
+
+
+            $manager->persist($contact);
         }
 
 
