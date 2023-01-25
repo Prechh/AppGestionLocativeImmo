@@ -72,7 +72,7 @@ class ContactFormType extends AbstractType
                     'minlength' => '2',
                     'maxlength' => '100'
                 ],
-                'label' => 'Sujet :',
+                'label' => 'Objet de votre messsage :',
                 'label_attr' => [
                     'class' => 'form-label mt-4'
                 ],
